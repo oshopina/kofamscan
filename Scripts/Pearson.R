@@ -1,3 +1,6 @@
+library(vegan)
+library(ggplot2)
+
 ############################### Data Import ################################### 
 
 ko_freq = read.table('Data/ko_frequency.tsv', header = T)
@@ -27,11 +30,11 @@ cor_results_sign = cor_results[names(p_results_sign)]
 
 ############################ Pearson graph ###################################
 cor_graph = list()
+df = as.data.frame(ko_freq_ra)
 
-for (i in names(cor_results_sign)) {
-  df = as.data.frame(ko_freq_ra)
+for (i in names(cor_results_sign[1:10])) {
   
-  plot = ggplot(df, aes(y = df[[i]], x = pH)) +
+  plot = ggplot(df, aes(y = .data[[i]], x = pH)) +
     geom_line(group = 1) +
     geom_point() +
     ylab(i)
